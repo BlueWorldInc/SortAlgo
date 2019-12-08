@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="js/highcharts.js"></script>
-    <script src="js/themes/grid.js"></script>
+    <script id="themeScript" src="js/themes/grid.js"></script>
     <link rel="stylesheet" type="text/css" href="chart.css">
     <title>Chart</title>
 </head>
+
 <body>
     <div id="pageTitle"> Welcome to the Chart display Page ! </div>
     <div id="container" style="width:100%; height:400px;"></div>
     <button onclick="drawChart()">Reload</button>
+    <!-- <button onclick="changeChartTheme()">Change Theme</button> -->
+    <select onchange="changeChartTheme(this)" name="themes" id="themes-select">
+        <option disabled="true" value="">--Please choose a theme option--</option>
+        <option value=avocado.js>avocado</option>
+        <option value=dark-blue.js>dark-blue</option>
+        <option value=dark-green.js>dark-green</option>
+        <option value=dark-unica.js>dark-unica</option>
+        <option value=gray.js>gray</option>
+        <option value=grid.js>grid</option>
+        <option value=grid-light.js>grid-light</option>
+        <option value=high-contrast-dark.js>high-contrast-dark</option>
+        <option value=high-contrast-light.js>high-contrast-light</option>
+        <option value=sand-signika.js>sand-signika</option>
+        <option value=skies.js>skies</option>
+        <option value=sunset.js>sunset</option>
+    </select>
     <script src="chart.js"></script>
 </body>
+
 </html>

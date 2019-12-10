@@ -1,0 +1,23 @@
+Objectif:
+Faire un graphique avec des barres qui representent des nombres, aléatoires, et qui doivent etre remis dans le bonne ordre.
+
+Outil possible d'utiliser:
+canvas (de html comme celui pour l'A star algo)
+www.highcharts.com
+https://canvasjs.com/html5-javascript-line-chart/
+https://www.chartjs.org/
+
+* Faire en sorte d'afficher une barre en fonction d'un nombre données. X
+* Faire en sorte d'afficher plusieurs barres X
+* Faire en sorte que les nombres soit random X
+* Faire en sorte de pouvoir rafraichir X
+
+Liste des algos:
+
+Tri par insertion
+Tri par selection
+Tri à bulles
+Tri Schell
+Tri fusion
+Tri rapide
+Tri Peigne

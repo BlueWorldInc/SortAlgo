@@ -14,9 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function drawChart() {
     var randoms = giveTenRandom();
-    for (var i = 0; i < randoms.length; i++) {
-        console.log(randoms[i]);
-    }
+    //for (var i = 0; i < randoms.length; i++) {
+    //    console.log(randoms[i]);
+    //}
+    //console.log(randoms);
+    triParInsertion(randoms);
+    //console.log(randoms);
+    
     var myChart = Highcharts.chart('container', {
         chart: {
             type: 'column'
@@ -56,7 +60,7 @@ function giveTenRandom() {
     return randoms;
 }
 
-function reDrawChart(randoms) {
+function reDrawChart(array) {
     var myChart = Highcharts.chart('container', {
         chart: {
             type: 'column'
@@ -65,7 +69,7 @@ function reDrawChart(randoms) {
             text: ''
         },
         xAxis: {
-            categories: randoms
+            categories: array
         },
         yAxis: {
             max: 100,
@@ -75,7 +79,7 @@ function reDrawChart(randoms) {
         },
         series: [{
             name: 'Numb3rs',
-            data: randoms
+            data: array
         }],
         plotOptions: {
             series: {
@@ -84,6 +88,38 @@ function reDrawChart(randoms) {
         },
         tooltip: { enabled: false }
     });
+}
+
+async function triParInsertion(arrayToSort) {
+    sortedArray = [];
+    for (var i = 0; i < arrayToSort.length; i++) {
+        actual = arrayToSort[i];
+        j = i;
+        while (actual < arrayToSort[j - 1] && j != 0) {
+            //deplacer les arraytosort(j) de 1 vers la droite
+            arrayToSort[j] = arrayToSort[j - 1];
+            j--;
+            await sleep(200);
+            reDrawChart(arrayToSort);
+        }
+        // deplacer le actual a la place j
+        arrayToSort[j] = actual;
+        //if (actual > )
+        //for (var i = 0; sortedArray.length; i++) {
+        //actual > 
+
+
+        // a > b ok
+        // a < b --> z = a, a = b, b = z
+        // tant que b < a, etc... et tant que l'on est pas au début (dernier element)
+        // on compare si c'est supérieur on le place la
+        // a chaque fois on deplace les element avant
+
+
+
+        //}
+    }
+    return arrayToSort;
 }
 
 async function changeChartTheme(theme) {
@@ -95,11 +131,11 @@ async function changeChartTheme(theme) {
     var script = document.createElement('script');
     script.id = "themeScript";
     console.log(theme.value);
-    script.src = 'js/themes/'+ theme.value;
+    script.src = 'js/themes/' + theme.value;
     head.appendChild(script);
     await sleep(10);
     reDrawChart(oldRandoms);
-    
+
     // to change the whole page CSS
     // var cssPage = document.querySelector("link");
     // cssPage.setAttribute("href", "chartcopy.css");
@@ -109,4 +145,4 @@ async function changeChartTheme(theme) {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
+}

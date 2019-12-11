@@ -18,7 +18,8 @@ function drawChart() {
     //    console.log(randoms[i]);
     //}
     //console.log(randoms);
-    triParInsertion(randoms);
+    //triParInsertion(randoms);
+    triParSelection(randoms);
     //console.log(randoms);
     
     var myChart = Highcharts.chart('container', {
@@ -90,8 +91,35 @@ function reDrawChart(array) {
     });
 }
 
+async function triParSelection(arrayToSort) {
+    // tant que [4] > [7] on continue jusqu'à la fin, on compare [7] pour voir si [11] est inférieur
+    // si [11] est inférieur on le selection, dès que l'on arrive on change de place entre le [11] et le [4]
+    // on fait ca pour tout la longeur du tableau
+
+    for (var i = 0; i < arrayToSort.length; i++) {
+        actual = arrayToSort[i];
+        selected = arrayToSort[i];
+        selectedIndex = i;
+        j = i;
+        while(j != arrayToSort.length) {
+            if(selected > arrayToSort[j]) {
+                selected = arrayToSort[j];
+                selectedIndex = j;
+            }
+            j++;
+        }
+        arrayToSort[i] = arrayToSort[selectedIndex];
+        arrayToSort[selectedIndex] = actual;
+        await sleep(200);
+        reDrawChart(arrayToSort);
+    }
+
+
+    return arrayToSort;
+}
+
 async function triParInsertion(arrayToSort) {
-    sortedArray = [];
+    //sortedArray = [];
     for (var i = 0; i < arrayToSort.length; i++) {
         actual = arrayToSort[i];
         j = i;

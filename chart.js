@@ -19,9 +19,9 @@ function drawChart() {
     //}
     //console.log(randoms);
     //triParInsertion(randoms);
-    triParSelection(randoms);
+    triABulle(randoms);
     //console.log(randoms);
-    
+
     var myChart = Highcharts.chart('container', {
         chart: {
             type: 'column'
@@ -91,6 +91,26 @@ function reDrawChart(array) {
     });
 }
 
+async function triABulle(arrayToSort) {
+
+    var temp = 0;
+    for (var i = 0; i < (arrayToSort.length - 1); i++) {
+        // il faut switcher un par un a partir du debut
+        // tant que l'on est pas à la fin - le i que l'on est
+        j = 0;
+        while (j < (arrayToSort.length -1 - i)) {
+            if (arrayToSort[j] > arrayToSort[j + 1]) {
+                temp = arrayToSort[j];
+                arrayToSort[j] = arrayToSort[j + 1];
+                arrayToSort[j + 1] = temp;
+            }
+            j++;
+        }
+    }
+
+    return arrayToSort;
+}
+
 async function triParSelection(arrayToSort) {
     // tant que [4] > [7] on continue jusqu'à la fin, on compare [7] pour voir si [11] est inférieur
     // si [11] est inférieur on le selection, dès que l'on arrive on change de place entre le [11] et le [4]
@@ -101,8 +121,8 @@ async function triParSelection(arrayToSort) {
         selected = arrayToSort[i];
         selectedIndex = i;
         j = i;
-        while(j != arrayToSort.length) {
-            if(selected > arrayToSort[j]) {
+        while (j != arrayToSort.length) {
+            if (selected > arrayToSort[j]) {
                 selected = arrayToSort[j];
                 selectedIndex = j;
             }

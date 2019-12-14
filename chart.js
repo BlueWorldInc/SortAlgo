@@ -19,7 +19,8 @@ function drawChart() {
     //}
     //console.log(randoms);
     //triParInsertion(randoms);
-    triABulle(randoms);
+    //triABulle(randoms);
+    triSchell(randoms);
     //console.log(randoms);
 
     var myChart = Highcharts.chart('container', {
@@ -91,6 +92,56 @@ function reDrawChart(array) {
     });
 }
 
+async function triSchell(arrayToSort) {
+    //for la liste n (x,y,z)
+    //for la liste n[0] / par la longeur du tableau = h
+    //tant que j = n[0] * i < longeur du tableau (ou alors h fois)
+    //on compare n[0] avec n[0]+j puis n[0]+j avec n[0]+j+j
+    //si n[0] > n[0]+j on intervertie
+    //on compare alors n[0]+j < n[0]-j si c'est le cas on intervertie tant que l'on est pas arrivé à 0
+    //arrayToSort = [35, 51, 33, 93, 32, 79, 71, 12, 2, 23];
+    //arrayToSort = [90, 56, 33, 88, 47, 22, 92, 31, 62, 19];
+    //arrayToSort = [93, 64, 78, 13, 33, 9, 92, 44, 66, 36];
+    //arrayToSort = [1, 1, 61, 45, 49, 24, 75, 3, 93, 23];
+    console.log(arrayToSort);
+    var nList = [6, 4, 2, 1];
+    var temp = 0;
+    for (var i = 0; i < nList.length; i++) {
+        var n = nList[i];
+        console.log((arrayToSort.length / n));
+
+        for (var z = 0; z < n; z++) {
+            console.log(arrayToSort);
+            for (var j = 0; j < (arrayToSort.length / n) - 1; j++) {
+                console.log(i + ' ||| ' + j + ' ||| ' + z);
+                console.log(arrayToSort[(j * n) + z] + ' |*|*| ' + arrayToSort[((j + 1) * n) + z]);
+                if (arrayToSort[(j * n) + z] > arrayToSort[((j + 1) * n) + z]) {
+                    temp = arrayToSort[(j * n) + z];
+                    arrayToSort[(j * n) + z] = arrayToSort[((j + 1) * n) + z];
+                    arrayToSort[((j + 1) * n) + z] = temp;
+                    var x = j;
+                    var c = true;
+                    while (x > 0 && c == true) {
+                        console.log('x : ' + x + ' n :' + n + ' z:' + z);
+                        console.log(arrayToSort[(x * n) + z]);
+                        console.log(arrayToSort[((x - 1) * n) + z]);
+                        if (arrayToSort[(x * n) + z] < arrayToSort[((x - 1) * n) + z]) {
+                            temp = arrayToSort[(x * n) + z];
+                            arrayToSort[(x * n) + z] = arrayToSort[((x - 1) * n) + z];
+                            arrayToSort[((x - 1) * n) + z] = temp;
+                        } else {
+                            c = false;
+                        }
+                        x--;
+                    }
+                }
+            }
+        }
+    }
+    console.log(arrayToSort);
+    return arrayToSort;
+}
+
 async function triABulle(arrayToSort) {
 
     var temp = 0;
@@ -98,7 +149,7 @@ async function triABulle(arrayToSort) {
         // il faut switcher un par un a partir du debut
         // tant que l'on est pas à la fin - le i que l'on est
         j = 0;
-        while (j < (arrayToSort.length -1 - i)) {
+        while (j < (arrayToSort.length - 1 - i)) {
             if (arrayToSort[j] > arrayToSort[j + 1]) {
                 temp = arrayToSort[j];
                 arrayToSort[j] = arrayToSort[j + 1];

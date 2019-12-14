@@ -99,22 +99,12 @@ async function triSchell(arrayToSort) {
     //on compare n[0] avec n[0]+j puis n[0]+j avec n[0]+j+j
     //si n[0] > n[0]+j on intervertie
     //on compare alors n[0]+j < n[0]-j si c'est le cas on intervertie tant que l'on est pas arrivé à 0
-    //arrayToSort = [35, 51, 33, 93, 32, 79, 71, 12, 2, 23];
-    //arrayToSort = [90, 56, 33, 88, 47, 22, 92, 31, 62, 19];
-    //arrayToSort = [93, 64, 78, 13, 33, 9, 92, 44, 66, 36];
-    //arrayToSort = [1, 1, 61, 45, 49, 24, 75, 3, 93, 23];
-    console.log(arrayToSort);
     var nList = [6, 4, 2, 1];
     var temp = 0;
     for (var i = 0; i < nList.length; i++) {
         var n = nList[i];
-        console.log((arrayToSort.length / n));
-
         for (var z = 0; z < n; z++) {
-            console.log(arrayToSort);
             for (var j = 0; j < (arrayToSort.length / n) - 1; j++) {
-                console.log(i + ' ||| ' + j + ' ||| ' + z);
-                console.log(arrayToSort[(j * n) + z] + ' |*|*| ' + arrayToSort[((j + 1) * n) + z]);
                 if (arrayToSort[(j * n) + z] > arrayToSort[((j + 1) * n) + z]) {
                     temp = arrayToSort[(j * n) + z];
                     arrayToSort[(j * n) + z] = arrayToSort[((j + 1) * n) + z];
@@ -122,9 +112,6 @@ async function triSchell(arrayToSort) {
                     var x = j;
                     var c = true;
                     while (x > 0 && c == true) {
-                        console.log('x : ' + x + ' n :' + n + ' z:' + z);
-                        console.log(arrayToSort[(x * n) + z]);
-                        console.log(arrayToSort[((x - 1) * n) + z]);
                         if (arrayToSort[(x * n) + z] < arrayToSort[((x - 1) * n) + z]) {
                             temp = arrayToSort[(x * n) + z];
                             arrayToSort[(x * n) + z] = arrayToSort[((x - 1) * n) + z];
@@ -138,7 +125,6 @@ async function triSchell(arrayToSort) {
             }
         }
     }
-    console.log(arrayToSort);
     return arrayToSort;
 }
 

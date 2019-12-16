@@ -20,7 +20,7 @@ function drawChart() {
     //console.log(randoms);
     //triParInsertion(randoms);
     //triABulle(randoms);
-    triSchell(randoms);
+    triParFusion(randoms);
     //console.log(randoms);
 
     var myChart = Highcharts.chart('container', {
@@ -90,6 +90,100 @@ function reDrawChart(array) {
         },
         tooltip: { enabled: false }
     });
+}
+
+async function triParFusion (arrayToSort) {
+    arrayToSort = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60];
+    //48, 52, 33, 21, 86
+    //48, 52, 33,
+    //48, 52
+
+    //[48, 52, 33, 21, 86, 61, 49, 45, 89, 60][48, 52, 33, 21, 86][61, 49, 45, 89, 60][61, 49, 45][48, 52][48][52]
+
+    console.log(arrayToSort);
+    //triCopyPourFusion(arrayToSort);
+    console.log(arrayToSort);
+    //dividedArray = [[]];
+    //dividedArray = [arrayToSort.slice(0, 5), arrayToSort.slice(5, 10)];
+    //dividedArray = [[arrayToSort.slice(0, 3), arrayToSort(3, 5)],[arrayToSort.slice(5, 8), arrayToSort(8, 10)]]
+    //dividedArray = [[[arrayToSort.slice(0, 2), arrayToSort.slice(2, 3)], arrayToSort(3, 5)],[[arrayToSort.slice(5, 7)], arrayToSort.slice(7, 8)], arrayToSort(8, 10)]]
+    var x = arrayToSort.length;
+    var nbDiv = (countFactors(x, 2));
+    var a = [];
+    var c = a;
+    for (var i = 0; i < nbDiv; i++) {
+        t = [];
+        a.push(t);
+        a = t;
+    }
+    console.log(c);
+    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
+    //Divide by two
+    //take right
+    //Divide by two
+    //until it's only one
+    //then compare
+    //then merge
+    //take left
+    //divide by two
+    //until it's only one
+    //then compare
+    //then merge
+    ////////////////////////////////////////////////////////////////
+    var tmp = arrayToSort.slice();
+    var tmp2 = arrayToSort.slice();
+    var d = [];
+    d.push(tmp);
+    for (var i = 0; i < nbDiv; i++) {
+        tmp = tmp.slice(0, Math.ceil(tmp.length/2));
+        d.push(tmp);
+        tmp2 = tmp2.slice(Math.ceil(tmp2.length/2), tmp2.length);
+        d.push(tmp2);
+        tmp = tmp2;
+    }
+
+    for (var i = 0; i < d.length; i++) {
+    //    console.log("d: ");
+    //    console.log(d[d.length-i-1]);
+        triCopyPourFusion(d[d.length-i-1]);
+    }
+    ////////////////////////////////////////////////////////////////
+    console.log(d);
+    console.log(arrayToSort);
+    
+    return arrayToSort;
+}
+
+function countFactors(x, n) {
+    var f = 0;
+    while (x > n) {
+        x /= n;
+        f++; 
+    }
+    return f;
+}
+
+function logOnThePage(text) {
+    var txt = document.createTextNode(text);
+    document.body.appendChild(txt);
+}
+
+function triCopyPourFusion(arrayToSort) {
+    c = arrayToSort.slice();
+    for (var i = 0; i < arrayToSort.length; i++) {
+        var min = c[0];
+        var minIndex = 0;
+        for (var j = 0; j < c.length; j++) {
+            if (c[j] < min) {
+                min = c[j];
+                minIndex = j;
+            }
+        }
+        c.splice(minIndex, 1);
+        arrayToSort[i] = min;
+    }
+    return arrayToSort;
 }
 
 async function triSchell(arrayToSort) {

@@ -92,7 +92,7 @@ function reDrawChart(array) {
     });
 }
 
-async function triParFusion (arrayToSort) {
+async function triParFusion(arrayToSort) {
     arrayToSort = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60];
     //48, 52, 33, 21, 86
     //48, 52, 33,
@@ -109,14 +109,14 @@ async function triParFusion (arrayToSort) {
     //dividedArray = [[[arrayToSort.slice(0, 2), arrayToSort.slice(2, 3)], arrayToSort(3, 5)],[[arrayToSort.slice(5, 7)], arrayToSort.slice(7, 8)], arrayToSort(8, 10)]]
     var x = arrayToSort.length;
     var nbDiv = (countFactors(x, 2));
-    var a = [];
-    var c = a;
-    for (var i = 0; i < nbDiv; i++) {
-        t = [];
-        a.push(t);
-        a = t;
-    }
-    console.log(c);
+    // var a = [];
+    // var c = a;
+    // for (var i = 0; i < nbDiv; i++) {
+    //     t = [];
+    //     a.push(t);
+    //     a = t;
+    // }
+    // console.log(c);
     ////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////
     //Divide by two
@@ -131,43 +131,76 @@ async function triParFusion (arrayToSort) {
     //then compare
     //then merge
     ////////////////////////////////////////////////////////////////
-    var tmp = arrayToSort.slice();
-    var tmp2 = arrayToSort.slice();
+    console.log(arrayToSort);
+    // var tmp = arrayToSort.slice();
+    // var tmp2 = arrayToSort.slice();
+    var tmp = createIndexArray(0, 9);
+    var tmp2 = createIndexArray(0, 9);
     var d = [];
     d.push(tmp);
     for (var i = 0; i < nbDiv; i++) {
-        tmp = tmp.slice(0, Math.ceil(tmp.length/2));
+        // tmp = tmp.slice(0, Math.ceil(tmp.length/2));
+        // d.push(tmp);
+        // tmp2 = tmp2.slice(Math.ceil(tmp2.length/2), tmp2.length);
+        // d.push(tmp2);
+        // tmp = tmp2;
+        tmp = createIndexArray(tmp[0], tmp[Math.ceil(tmp.length / 2)] - 1);
         d.push(tmp);
-        tmp2 = tmp2.slice(Math.ceil(tmp2.length/2), tmp2.length);
+        tmp2 = createIndexArray(tmp2[Math.ceil(tmp2.length / 2)], tmp2[tmp2.length - 1]);
         d.push(tmp2);
         tmp = tmp2;
+
+        if ((d[d.length - 1].length == 1 && d[d.length - 2].length == 1) || (d[d.length - 1].length == 1 && d[d.length - 2].length == 2)) {
+            arrayToSort = compareIndex([d[d.length - 1]], [d[d.length - 2]], arrayToSort);
+            d.splice(d.length - 3, 3);
+            i--;
+            console.log(d[d.length - 1]);
+            tmp = d[d.length - 1];
+            tmp2 = d[d.length - 1];
+        }
+
     }
 
     for (var i = 0; i < d.length; i++) {
-    //    console.log("d: ");
-    //    console.log(d[d.length-i-1]);
-        triCopyPourFusion(d[d.length-i-1]);
+        //    console.log("d: ");
+        //    console.log(d[d.length-i-1]);
+        //    triCopyPourFusion(d[d.length-i-1]);
     }
     ////////////////////////////////////////////////////////////////
     console.log(d);
     console.log(arrayToSort);
-    
+
     return arrayToSort;
+}
+
+function compareIndex(i0, i1, array) {
+    if (array[i1] > array[i0]) {
+        var t = array[i0];
+        array[i0] = array[i1];
+        array[i1] = t;
+    }
+    return array;
 }
 
 function countFactors(x, n) {
     var f = 0;
     while (x > n) {
         x /= n;
-        f++; 
+        f++;
     }
     return f;
 }
 
-function logOnThePage(text) {
-    var txt = document.createTextNode(text);
-    document.body.appendChild(txt);
+function createIndexArray(iMin, iMax) {
+    var a = [];
+    var x = 0;
+    for (var i = iMin; i < (iMax + 1); i++) {
+        a[x] = i;
+        x++;
+    }
+    return a;
 }
+
 
 function triCopyPourFusion(arrayToSort) {
     c = arrayToSort.slice();
@@ -184,6 +217,11 @@ function triCopyPourFusion(arrayToSort) {
         arrayToSort[i] = min;
     }
     return arrayToSort;
+}
+
+function logOnThePage(text) {
+    var txt = document.createTextNode(text);
+    document.body.appendChild(txt);
 }
 
 async function triSchell(arrayToSort) {

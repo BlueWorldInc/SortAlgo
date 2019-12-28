@@ -12,15 +12,99 @@ document.addEventListener('DOMContentLoaded', function () {
 //     return randoms;
 // }
 
-function drawChart() {
+async function drawChart() {
     var randoms = giveTenRandom();
     //for (var i = 0; i < randoms.length; i++) {
     //    console.log(randoms[i]);
     //}
     //console.log(randoms);
     //triParInsertion(randoms);
+    // var iterations = 10000;
+    // console.time('Tri par insertion');
+    // for (var i = 0; i < iterations; i++) {
+    //     arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+    //     triParInsertion(arrayToSortPerf);
+    // }
+    // console.timeEnd('Tri par insertion');
+
+    // console.time('Tri par selection');
+    // for (var i = 0; i < iterations; i++) {
+    //     arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+    //     triParSelection(arrayToSortPerf);
+    // }
+    // console.timeEnd('Tri par selection');
+
+    // console.time('Tri a Bulle');
+    // for (var i = 0; i < iterations; i++) {
+    //     arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+    //     triABulle(arrayToSortPerf);
+    // }
+    // console.timeEnd('Tri a Bulle');
+
+    // console.time('Tri Schell');
+    // for (var i = 0; i < iterations; i++) {
+    //     arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+    //     triSchell(arrayToSortPerf);
+    // }
+    // console.timeEnd('Tri Schell');
+    // var arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+    // console.log(await triBinary(arrayToSortPerf));
+    
+    var iterations = 1;
+    var nbRandom = 10000;
+
+    console.time('Give Random');
+    for (var i = 0; i < iterations; i++) {
+        giveRandom(100000);
+    }
+    console.timeEnd('Give Random');
+
+    
+    console.time('Tri par Insertion');
+    for (var i = 0; i < iterations; i++) {
+        // arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+        arrayToSortPerf = giveRandom(nbRandom);
+        triParInsertion(arrayToSortPerf);
+    }
+    console.timeEnd('Tri par Insertion');
+
+    console.time('Tri par Selection');
+    for (var i = 0; i < iterations; i++) {
+        // arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+        arrayToSortPerf = giveRandom(nbRandom);
+        triParSelection(arrayToSortPerf);
+    }
+    console.timeEnd('Tri par Selection');
+
+    console.time('Tri a Bulle');
+    for (var i = 0; i < iterations; i++) {
+        // arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+        arrayToSortPerf = giveRandom(nbRandom);
+        triABulle(arrayToSortPerf);
+    }
+    console.timeEnd('Tri a Bulle');
+
+    console.time('Tri Schell');
+    for (var i = 0; i < iterations; i++) {
+        // arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+        arrayToSortPerf = giveRandom(nbRandom);
+        triSchell(arrayToSortPerf);
+    }
+    console.timeEnd('Tri Schell');
+
+    console.time('Tri par Fusion');
+    for (var i = 0; i < iterations; i++) {
+        //arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+        arrayToSortPerf = giveRandom(nbRandom);
+        triParFusion(arrayToSortPerf);
+    }
+    console.timeEnd('Tri par Fusion');
+    console.time('Tri Binary');
+        arrayToSortPerf = giveRandom(nbRandom);
+        //console.log(await triBinary(arrayToSortPerf));
+        triBinary(arrayToSortPerf);
+    console.timeEnd('Tri Binary');
     //triABulle(randoms);
-    triParFusion(randoms);
     //console.log(randoms);
 
     var myChart = Highcharts.chart('container', {
@@ -62,6 +146,15 @@ function giveTenRandom() {
     return randoms;
 }
 
+function giveRandom(x) {
+    var randoms = [];
+    for (var i = 0; i < x; i++) {
+        randoms.push(Math.floor(Math.random() * Math.floor(x) + 1));
+    }
+    oldRandoms = randoms;
+    return randoms;
+}
+
 function reDrawChart(array) {
     var myChart = Highcharts.chart('container', {
         chart: {
@@ -92,83 +185,147 @@ function reDrawChart(array) {
     });
 }
 
-async function triParFusion(arrayToSort) {
-    arrayToSort = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60];
-    //48, 52, 33, 21, 86
-    //48, 52, 33,
-    //48, 52
+async function triBinary(arrayToSort) {
+    var copyArray = [];
+    copyArray.push(arrayToSort[0]);
+    var aLen = arrayToSort.length;
+    for (var i = 1; i < aLen; i++) {
+        //console.log(i);
+        insertToSortedBinary(copyArray, arrayToSort[i]);
+    }
+    arrayToSort = copyArray;
+    return arrayToSort;
+}
 
-    //[48, 52, 33, 21, 86, 61, 49, 45, 89, 60][48, 52, 33, 21, 86][61, 49, 45, 89, 60][61, 49, 45][48, 52][48][52]
-
-    console.log(arrayToSort);
-    //triCopyPourFusion(arrayToSort);
-    console.log(arrayToSort);
-    //dividedArray = [[]];
-    //dividedArray = [arrayToSort.slice(0, 5), arrayToSort.slice(5, 10)];
-    //dividedArray = [[arrayToSort.slice(0, 3), arrayToSort(3, 5)],[arrayToSort.slice(5, 8), arrayToSort(8, 10)]]
-    //dividedArray = [[[arrayToSort.slice(0, 2), arrayToSort.slice(2, 3)], arrayToSort(3, 5)],[[arrayToSort.slice(5, 7)], arrayToSort.slice(7, 8)], arrayToSort(8, 10)]]
-    var x = arrayToSort.length;
-    var nbDiv = (countFactors(x, 2));
-    // var a = [];
-    // var c = a;
-    // for (var i = 0; i < nbDiv; i++) {
-    //     t = [];
-    //     a.push(t);
-    //     a = t;
-    // }
-    // console.log(c);
-    ////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////
-    //Divide by two
-    //take right
-    //Divide by two
-    //until it's only one
-    //then compare
-    //then merge
-    //take left
-    //divide by two
-    //until it's only one
-    //then compare
-    //then merge
-    ////////////////////////////////////////////////////////////////
-    console.log(arrayToSort);
-    // var tmp = arrayToSort.slice();
-    // var tmp2 = arrayToSort.slice();
-    var tmp = createIndexArray(0, 9);
-    var tmp2 = createIndexArray(0, 9);
-    var d = [];
-    d.push(tmp);
-    for (var i = 0; i < nbDiv; i++) {
-        // tmp = tmp.slice(0, Math.ceil(tmp.length/2));
-        // d.push(tmp);
-        // tmp2 = tmp2.slice(Math.ceil(tmp2.length/2), tmp2.length);
-        // d.push(tmp2);
-        // tmp = tmp2;
-        tmp = createIndexArray(tmp[0], tmp[Math.ceil(tmp.length / 2)] - 1);
-        d.push(tmp);
-        tmp2 = createIndexArray(tmp2[Math.ceil(tmp2.length / 2)], tmp2[tmp2.length - 1]);
-        d.push(tmp2);
-        tmp = tmp2;
-
-        if ((d[d.length - 1].length == 1 && d[d.length - 2].length == 1) || (d[d.length - 1].length == 1 && d[d.length - 2].length == 2)) {
-            arrayToSort = compareIndex([d[d.length - 1]], [d[d.length - 2]], arrayToSort);
-            d.splice(d.length - 3, 3);
-            i--;
-            console.log(d[d.length - 1]);
-            tmp = d[d.length - 1];
-            tmp2 = d[d.length - 1];
+function insertToSortedBinary(array, numberToInsert) {
+    var aLen = array.length;
+    if (numberToInsert > array[aLen - 1]) {
+        array.push(numberToInsert);
+        return array;
+    }
+    var found = false;
+    var i = Math.floor(aLen / 2);
+    var d = Math.floor(aLen / 2);
+    var v = 0;
+    while (!found && v < 20) {
+        //console.log("inside found");
+        //console.log(i);
+        //console.log(array[i]);
+        if (numberToInsert == array[i]) {
+            array.splice(i, 0, numberToInsert);
+            return array;
         }
+        if (checkIfBetweenForBinary(array, numberToInsert, i)) {
+            //console.log("inside binary check");
+            array.splice(i, 0, numberToInsert);
+            return array;
+        }
+        if (numberToInsert < array[i]) {
+            //console.log("a");
+            d = Math.floor(d / 2);
+            i = i - d;
+            if (d == 0) {
+                i--;
+            }
+        } else if (numberToInsert > array[i]) {
+            //console.log("b");
+            d = Math.floor(d / 2);
+            i = i + d;
+            if (d == 0) {
+                i++;
+            }
+        }
+        v++;
+    }
+    return array;
+}
+
+function checkIfBetweenForBinary(array, number, index) {
+    //console.log(array);
+    if (index == 0 || (array[index - 1] < number) && (array[index] > number)) {
+        return true;
+    }
+    return false;
+}
+
+async function triParFusion(arrayToSort) {
+    //arrayToSort = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+    // [1, 5] [6,  9] // 10
+    // [1, 5] [6, 10] // 11
+    // [1, 6] [7, 11] // 12
+    var x = arrayToSort.length;
+    //var nbDiv = (countFactors(x, 2));
+    ///////////////////////////////////////////////////////////////////////////////////////
+
+    if (x == x) {
+        var proc = ['np'];
+        var tmp = createIndexArray(0, arrayToSort.length - 1, proc);
+        var tmp2 = createIndexArray(0, arrayToSort.length - 1, proc);
+        var d = [];
+        d.push(tmp);
+        // var nbr = 0;
+        while (Array.isArray(d) && d.length) {
+            //console.log(d);
+            if (!(d[d.length - 1].length == 3 || d[d.length - 1].length == 2 || d[d.length - 1][0] == 'p')) {
+                d[d.length - 1][0] = 'p';
+                proc = ['np'];
+                tmp = createIndexArray(tmp[1], tmp[Math.floor((tmp.length) / 2)], proc);
+                d.push(tmp);
+                //proc = ['p'];
+                tmp2 = createIndexArray(tmp2[Math.floor((tmp2.length) / 2) + 1], tmp2[tmp2.length - 1], proc);
+                d.push(tmp2);
+                tmp = tmp2;
+            } else if (d[d.length - 1].length == 2) {
+                d.splice(d.length - 1, 1);
+            } else if (d[d.length - 1].length == 3 || d[d.length - 1][0] == 'p') {
+                arrayToSort = compareFromToIndex([d[d.length - 1][1]], [d[d.length - 1][d[d.length - 1].length - 1]], arrayToSort);
+                d.splice(d.length - 1, 1);
+                tmp2 = d[d.length - 1];
+                tmp = tmp2;
+            }
+            // nbr++;
+        }
+        /*
+        for (var i = 0; i < nbDiv; i++) {
+            // console.log(i);
+            if (!(d[d.length - 1].length == 3 || d[d.length - 1].length == 2)) {
+                console.log('a');
+                proc = ['np'];
+                tmp = createIndexArray(tmp[1], tmp[Math.floor((tmp.length) / 2)], proc);
+                d.push(tmp);
+                proc = ['p'];
+                tmp2 = createIndexArray(tmp2[Math.floor((tmp2.length) / 2) + 1], tmp2[tmp2.length - 1], proc);
+                d.push(tmp2);
+                tmp = tmp2;
+            }
+            if (d[d.length - 1].length == 3) {
+                console.log('b');
+                arrayToSort = compareIndex([d[d.length - 1][1]], [d[d.length - 1][2]], arrayToSort);
+                // console.log(arrayToSort);
+                d.splice(d.length - 1, 1);
+                i--;
+            } else if (d[d.length - 1].length == 2) {
+                console.log('c');
+                d.splice(d.length - 1, 1);
+            }
+            console.log(d);
+            /*
+            if ((d[d.length - 1].length == 1 && d[d.length - 2].length == 1) || (d[d.length - 1].length == 1 && d[d.length - 2].length == 2)) {
+                arrayToSort = compareIndex([d[d.length - 1]], [d[d.length - 2]], arrayToSort);
+                d.splice(d.length - 3, 3);
+                i--;
+                console.log(d[d.length - 1]);
+                tmp = d[d.length - 1];
+                tmp2 = d[d.length - 1];
+            }
+            */
+        //}
 
     }
 
-    for (var i = 0; i < d.length; i++) {
-        //    console.log("d: ");
-        //    console.log(d[d.length-i-1]);
-        //    triCopyPourFusion(d[d.length-i-1]);
-    }
-    ////////////////////////////////////////////////////////////////
-    console.log(d);
-    console.log(arrayToSort);
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //console.log(arrayToSort);
+    ///////////////////////////////////////////////////////////////////////////////////////
 
     return arrayToSort;
 }
@@ -182,6 +339,39 @@ function compareIndex(i0, i1, array) {
     return array;
 }
 
+function compareFromToIndex(i0, i1, array) {
+    i0 = parseInt(i0[0]);
+    i1 = parseInt(i1[0]) + 1;
+    c = array.slice(i0, i1);
+    cLen = c.length;
+    for (var ix = 0; ix < cLen; ix++) {
+        var min = c[0]
+        var minIndex = 0;
+        for (var i = 1; i < c.length; i++) {
+            if (c[i] < min) {
+                min = c[i];
+                minIndex = i;
+            }
+        }
+        c.splice(minIndex, 1);
+        array[ix + i0] = min;
+    }
+
+    // for (var i = 0; i < (cLen - 1); i++) {
+    //     var min = c[0];
+    //     var minIndex = 0;
+    //     for (var j = 1; j < (cLen); j++) {
+    //         if (c[j] < min) {
+    //             min = c[j];
+    //             minIndex = j;
+    //         }
+    //     }
+    //     c.splice(minIndex, 1);
+    //     array[i0] = min;
+    // }
+    return array;
+}
+
 function countFactors(x, n) {
     var f = 0;
     while (x > n) {
@@ -191,9 +381,9 @@ function countFactors(x, n) {
     return f;
 }
 
-function createIndexArray(iMin, iMax) {
-    var a = [];
-    var x = 0;
+function createIndexArray(iMin, iMax, proc) {
+    var a = proc.slice();
+    var x = 1;
     for (var i = iMin; i < (iMax + 1); i++) {
         a[x] = i;
         x++;
@@ -299,8 +489,8 @@ async function triParSelection(arrayToSort) {
         }
         arrayToSort[i] = arrayToSort[selectedIndex];
         arrayToSort[selectedIndex] = actual;
-        await sleep(200);
-        reDrawChart(arrayToSort);
+        //await sleep(200);
+        //reDrawChart(arrayToSort);
     }
 
 
@@ -316,8 +506,8 @@ async function triParInsertion(arrayToSort) {
             //deplacer les arraytosort(j) de 1 vers la droite
             arrayToSort[j] = arrayToSort[j - 1];
             j--;
-            await sleep(200);
-            reDrawChart(arrayToSort);
+            //await sleep(200);
+            //reDrawChart(arrayToSort);
         }
         // deplacer le actual a la place j
         arrayToSort[j] = actual;

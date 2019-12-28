@@ -1,0 +1,16 @@
+arraytosort
+c = copy arraytosort(i0, i1)
+
+c[0] = min
+minindex = 0
+for i < c.length
+	if c[i] < min
+		min = c[i]
+		minindex = i
+	c splice
+	array[ix] = min
+	ix++;
+	i = 0;
+	min = c[0]
+	
+

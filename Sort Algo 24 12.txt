@@ -1,0 +1,11 @@
+tant que le d n'est pas vide
+tant que c'est pas egale a deux ou que c'est pas egale a p
+	on met celui ou l'on est en p
+	on divise //sauf si c'est p (déjà diviser)
+si egale a 1
+	on vire 
+	on fait i--
+sinon (si egale a deux ou si egale a p)
+	on compare
+	on vire ce que l'on a comparer
+	on fait i--

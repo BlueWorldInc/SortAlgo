@@ -206,8 +206,8 @@ function insertToSortedBinary(array, numberToInsert) {
     var found = false;
     var i = Math.floor(aLen / 2);
     var d = Math.floor(aLen / 2);
-    var v = 0;
-    while (!found && v < 20) {
+    //var v = 0;
+    while (!found) {
         //console.log("inside found");
         //console.log(i);
         //console.log(array[i]);
@@ -235,7 +235,7 @@ function insertToSortedBinary(array, numberToInsert) {
                 i++;
             }
         }
-        v++;
+        //v++;
     }
     return array;
 }

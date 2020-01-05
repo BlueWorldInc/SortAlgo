@@ -49,7 +49,7 @@ async function drawChart() {
     // console.timeEnd('Tri Schell');
     // var arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
     // console.log(await triBinary(arrayToSortPerf));
-    
+
     var iterations = 1;
     var nbRandom = 10000;
     var diviseur = 1;
@@ -60,10 +60,11 @@ async function drawChart() {
     console.timeEnd('Give Random');
     //var arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
     //console.log(arrayToSortPerf);
+    //console.log(await triPeigne(arrayToSortPerf));
     //triRapide(arrayToSortPerf);
     //console.log(await triRapide(arrayToSortPerf));
     //console.log(await triRapide(giveRandom(nbRandom)));
-    randoms = await triRapide(randoms);
+    //randoms = await triRapide(randoms);
     //console.log(randoms);
     
     console.time('Tri par Insertion');
@@ -90,6 +91,7 @@ async function drawChart() {
     }
     console.timeEnd('Tri a Bulle');
 
+    
     console.time('Tri Schell');
     for (var i = 0; i < iterations; i++) {
         // arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
@@ -121,10 +123,19 @@ async function drawChart() {
         arrayToSortPerf = await triRapide(arrayToSortPerf);
     }
     console.timeEnd('Tri Rapide');
+    
+    console.time('Tri Peigne');
+    for (var i = 0; i < iterations; i++) {
+        // arrayToSortPerf = [48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55, 48, 52, 33, 21, 86, 61, 49, 45, 89, 60, 55];
+        arrayToSortPerf = giveRandom(nbRandom / diviseur);
+        triPeigne(arrayToSortPerf);
+    }
+    console.timeEnd('Tri Peigne');
+    
 
     //triABulle(randoms);
     //console.log(randoms);
-    
+
     var myChart = Highcharts.chart('container', {
         chart: {
             type: 'column'
@@ -203,10 +214,53 @@ function reDrawChart(array) {
     });
 }
 
+async function triPeigne(arrayToSort) {
+    var aLen = arrayToSort.length;
+    var div = dividePeigne(aLen);
+    var tmp = 0;
+    for (var j = 0; j < div.length - 1; j++) {
+        var d = div[j]
+        for (var i = 0; i + d < (aLen - 1); i++) {
+            if (arrayToSort[i] > arrayToSort[i + d]) {
+                tmp = arrayToSort[i + d];
+                arrayToSort[i + d] = arrayToSort[i];
+                arrayToSort[i] = tmp;
+            }
+        }
+    }
+    var sorted = 1;
+    while (sorted != 0) {
+        sorted = 0;
+        for (var i = 0; i < (aLen - 1); i++) {
+            if (arrayToSort[i] > arrayToSort[i + 1]) {
+                tmp = arrayToSort[i + 1];
+                arrayToSort[i + 1] = arrayToSort[i];
+                arrayToSort[i] = tmp;
+                sorted++;
+            }
+        }
+    }
+    return arrayToSort;
+}
+
+function dividePeigne(aLen) {
+    var div = [];
+    var actual = Math.floor(aLen / 1.3);
+    div.push(actual);
+    for (var i = 0; i < aLen; i++) {
+        actual = Math.floor(actual / 1.3);
+        if (actual <= 0) {
+            break;
+        }
+        div.push(actual);
+    }
+    return div;
+}
+
 async function triRapide(arrayToSort) {
     //console.log(arrayToSort);
     var aLen = arrayToSort.length;
-    var pivot = arrayToSort[aLen -1];
+    var pivot = arrayToSort[aLen - 1];
     var leftA = [];
     var rightA = [];
     for (var i = 0; i < aLen - 1; i++) {
@@ -234,10 +288,10 @@ async function triRapide(arrayToSort) {
     //console.log('Left : ' + leftA);
     //console.log('Pivot : ' + pivot);
     //console.log('Right : ' + rightA);
-    if (! (leftA.length <= 0)) {
+    if (!(leftA.length <= 0)) {
         leftA = await (triRapide(leftA));
-    } 
-    if (! (rightA.length <= 0)) {
+    }
+    if (!(rightA.length <= 0)) {
         rightA = await (triRapide(rightA));
     }
 
